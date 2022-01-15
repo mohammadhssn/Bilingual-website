@@ -1,6 +1,9 @@
 {% load static %}
 {% load slideshow_tags %}
-<!DOCTYPE html>
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCKTYPE html>
 <html lang="en">
 <head>
 
@@ -11,12 +14,16 @@
     <meta name="description" content="Autoplay usage demo">
     <meta name="author" content="David Deutsch">
     <title>
-        Django | Owl Carousel
+        {% translate 'Django' %} | Owl Carousel
     </title>
 
     <!-- Stylesheets -->
     <!--    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,400italic,300italic' rel='stylesheet' type='text/css'>-->
     <link rel="stylesheet" href="{% static 'slideshow/assets/css/docs.theme.min.css' %}">
+    {% if LANGUAGE_CODE == 'fa' %}
+    <link rel="stylesheet" href="{% static 'slideshow/assets/css/rtl.css' %}">
+    {% endif %}
+
 
     <!-- Owl Stylesheets -->
     <link rel=" stylesheet
@@ -47,14 +54,20 @@
 </head>
 <body>
 
-
 <!-- header -->
 <header class="header">
     <div class="row">
         <div class="large-12 columns">
             <div class="brand left">
                 <h3>
-                    <a href="/OwlCarousel2/">Django and owl.carousel.js</a>
+                    <a href="/OwlCarousel2/">{% translate 'Django' %} {% translate 'and' %} owl.carousel.js</a>
+                </h3>
+            </div>
+            <div class="brand right">
+                <h3>
+                    <a href="{% url 'slideshow:change_lang' %}?lang=en&next=/en/{{request.path|slice:'4:'}}">{% translate 'EN' %}</a>
+                    /
+                    <a href="{% url 'slideshow:change_lang' %}?lang=fa&next=/fa/{{request.path|slice:'4:'}}">{% translate 'FA' %}</a>
                 </h3>
             </div>
             <a id="toggle-nav" class="right">
@@ -64,11 +77,10 @@
     </div>
 </header>
 
-<!-- title -->
 <section class="title">
     <div class="row">
         <div class="large-12 columns">
-            <h1>Articles</h1>
+            <h1>{% translate 'Articles' %}</h1>
         </div>
     </div>
 </section>
@@ -80,7 +92,7 @@
     <div class="row">
         <div class="large-12 columns">
             <h5>
-                <a href="#">mohammadhssn</a>
+                <a href="#">{% translate 'mohammadhassan' %}</a>
                 <a id="custom-tweet-button" href="#" target="_blank"></a>
             </h5>
         </div>
