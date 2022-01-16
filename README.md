@@ -13,4 +13,8 @@ mv .env-sample .env
 
 python manage.py migrate
 
+NOTE:
+    ```python manage.py collectstatic
+    ```
+
 python manage.py createsuperuser
