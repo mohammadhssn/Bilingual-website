@@ -22,6 +22,8 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('slideshow.urls', namespace='slideshow')),
+    path('o/', include('social_django.urls', namespace='social')),
+
 )
 
 if settings.DEBUG:

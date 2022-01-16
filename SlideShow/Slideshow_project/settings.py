@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,7 +40,8 @@ INSTALLED_APPS = [
     # Local apps
     'slideshow.apps.SlideshowConfig',
     # Third-party package
-    'translated_fields'
+    'translated_fields',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +136,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Local path
 # LOCALE_PATHS = BASE_DIR / 'locale'
+
+
+# SOCIAL DJANGO
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email'
+]
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'slideshow:home'
+SOCIAL_AUTH_LOGIN_ERROR_URL = 'slideshow:home'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
